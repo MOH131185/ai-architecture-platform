@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LocationAnalysis from './components/LocationAnalysis';
 
 function App() {
   const [address, setAddress] = useState('');
@@ -78,17 +79,7 @@ function App() {
 
           {step === 2 && (
             <div>
-              <h2>Step 2: Location Analysis</h2>
-              <div style={{
-                backgroundColor: '#f8f9fa',
-                padding: '20px',
-                borderRadius: '8px',
-                marginBottom: '20px'
-              }}>
-                <p><strong>Address:</strong> {address}</p>
-                <p><strong>Climate:</strong> Temperate</p>
-                <p><strong>Zoning:</strong> Commercial</p>
-              </div>
+              <LocationAnalysis address={address} />
               <button
                 onClick={handleNext}
                 style={{
