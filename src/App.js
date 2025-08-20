@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import LocationAnalysis from './components/LocationAnalysis';
+import PortfolioUpload from './components/PortfolioUpload';
 
 function App() {
   const [address, setAddress] = useState('');
@@ -78,17 +80,7 @@ function App() {
 
           {step === 2 && (
             <div>
-              <h2>Step 2: Location Analysis</h2>
-              <div style={{
-                backgroundColor: '#f8f9fa',
-                padding: '20px',
-                borderRadius: '8px',
-                marginBottom: '20px'
-              }}>
-                <p><strong>Address:</strong> {address}</p>
-                <p><strong>Climate:</strong> Temperate</p>
-                <p><strong>Zoning:</strong> Commercial</p>
-              </div>
+              <LocationAnalysis address={address} />
               <button
                 onClick={handleNext}
                 style={{
@@ -109,15 +101,7 @@ function App() {
           {step === 3 && (
             <div>
               <h2>Step 3: Design Preferences</h2>
-              <div style={{
-                border: '2px solid #667eea',
-                borderRadius: '8px',
-                padding: '15px',
-                marginBottom: '20px'
-              }}>
-                <h3>Portfolio + AI Styles</h3>
-                <p>Combine your designs with AI</p>
-              </div>
+              <PortfolioUpload />
               <button
                 onClick={handleNext}
                 style={{
@@ -127,7 +111,8 @@ function App() {
                   fontSize: '16px',
                   border: 'none',
                   borderRadius: '8px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  marginTop: '20px'
                 }}
               >
                 Generate Design
