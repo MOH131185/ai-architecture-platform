@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import LocationAnalysis from './components/LocationAnalysis';
 import PortfolioUpload from './components/PortfolioUpload';
+import GeneratingScreen from './components/GeneratingScreen';
 
 function App() {
   const [address, setAddress] = useState('');
   const [step, setStep] = useState(1);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleNext = () => {
-    if (step < 4) {
+    if (step === 3) {
+      setIsGenerating(true);
+      setTimeout(() => {
+        setIsGenerating(false);
+        setStep(step + 1);
+      }, 3000);
+    } else if (step < 4) {
       setStep(step + 1);
     } else {
       setStep(1);
@@ -41,9 +49,13 @@ function App() {
           textAlign: 'center'
         }}>
           
-          {step === 1 && (
-            <div>
-              <h2>Step 1: Enter Location</h2>
+          {isGenerating ? (
+            <GeneratingScreen />
+          ) : (
+            <>
+              {step === 1 && (
+                <div>
+                  <h2>Step 1: Enter Location</h2>
               <input
                 type="text"
                 value={address}
@@ -129,37 +141,21 @@ function App() {
                 gap: '15px',
                 marginBottom: '20px'
               }}>
-                <div style={{
-                  backgroundColor: '#667eea',
-                  color: 'white',
-                  padding: '20px',
-                  borderRadius: '8px'
-                }}>
-                  <h4>2D Floor Plan</h4>
+                <div>
+                  <img src="https://picsum.photos/seed/floorplan/400/300" alt="2D Floor Plan" style={{width: '100%', borderRadius: '8px'}} />
+                  <h4 style={{marginTop: '10px'}}>2D Floor Plan</h4>
                 </div>
-                <div style={{
-                  backgroundColor: '#764ba2',
-                  color: 'white',
-                  padding: '20px',
-                  borderRadius: '8px'
-                }}>
-                  <h4>3D Exterior</h4>
+                <div>
+                  <img src="https://picsum.photos/seed/exterior/400/300" alt="3D Exterior" style={{width: '100%', borderRadius: '8px'}} />
+                  <h4 style={{marginTop: '10px'}}>3D Exterior</h4>
                 </div>
-                <div style={{
-                  backgroundColor: '#10B981',
-                  color: 'white',
-                  padding: '20px',
-                  borderRadius: '8px'
-                }}>
-                  <h4>3D Interior</h4>
+                <div>
+                  <img src="https://picsum.photos/seed/interior/400/300" alt="3D Interior" style={{width: '100%', borderRadius: '8px'}} />
+                  <h4 style={{marginTop: '10px'}}>3D Interior</h4>
                 </div>
-                <div style={{
-                  backgroundColor: '#F59E0B',
-                  color: 'white',
-                  padding: '20px',
-                  borderRadius: '8px'
-                }}>
-                  <h4>Site Plan</h4>
+                <div>
+                  <img src="https://picsum.photos/seed/siteplan/400/300" alt="Site Plan" style={{width: '100%', borderRadius: '8px'}} />
+                  <h4 style={{marginTop: '10px'}}>Site Plan</h4>
                 </div>
               </div>
               
@@ -192,6 +188,8 @@ function App() {
                 New Project
               </button>
             </div>
+          )}
+            </>
           )}
         </div>
         
